@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  # 1. FastAPI REST Backend Service
+  airaware-api:
+    build: .
+    container_name: airaware-api
+    command: uvicorn api:app --host 0.0.0.0 --port 8000
+    ports:
+      - "8000:8000"
+    environment:
+      - ENVIRONMENT=production
+    volumes:
+      - ./data:/app/data
+      - ./models:/app/models
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # 2. Streamlit Interactive Dashboard
+  airaware-dashboard:
+    build: .
+    container_name: airaware-dashboard
+    command: streamlit run app.py --server.port=8501 --server.address=0.0.0.0
+    ports:
+      - "8501:8501"
+    environment:
+      - API_URL=http://airaware-api:8000
+    depends_on:
+      - airaware-api
+    volumes:
+      - ./data:/app/data
+      - ./models:/app/models
+    restart: unless-stopped

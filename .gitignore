@@ -1,0 +1,36 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyd
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+
+# Logs & temp
+*.log
+logs/
+.system_generated/
+.pytest_cache/
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+
+# OS generated
+.DS_Store
+Thumbs.db
+
+# Large data artifacts — track only structure, not raw files
+artifacts/data/*.csv
+artifacts/data/*.json
+# Keep model JSON (small enough)
+# artifacts/models/
+
+# Notebooks checkpoints
+notebooks/.ipynb_checkpoints/

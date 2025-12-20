@@ -1,0 +1,15 @@
+services:
+  api:
+    host: "0.0.0.0"
+    port: 8000
+    workers: 1
+    reload: true
+  dashboard:
+    host: "0.0.0.0"
+    port: 8501
+    theme: "dark"
+
+paths:
+  models: "artifacts/models"
+  data: "artifacts/data"
+  logs: "logs"
